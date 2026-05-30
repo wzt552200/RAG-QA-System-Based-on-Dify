@@ -90,11 +90,24 @@ workflow:
       type: custom
       zIndex: 0
     - data:
+        isInIteration: false
         isInLoop: false
         sourceType: knowledge-retrieval
-        targetType: llm
-      id: 1780119009458-source-llm-target
+        targetType: http-request
+      id: 1780119009458-source-1780125016783-target
+      selected: false
       source: '1780119009458'
+      sourceHandle: source
+      target: '1780125016783'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: http-request
+        targetType: llm
+      id: 1780125016783-source-llm-target
+      source: '1780125016783'
       sourceHandle: source
       target: llm
       targetHandle: target
@@ -109,11 +122,11 @@ workflow:
       height: 73
       id: '1780118196271'
       position:
-        x: 80
-        y: 282
+        x: 133
+        y: 283
       positionAbsolute:
-        x: 80
-        y: 282
+        x: 133
+        y: 283
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -145,20 +158,16 @@ workflow:
         prompt_template:
         - id: a2843c2e-ebc5-4aeb-806c-40f341d10dbd
           role: system
-          text: '你是一位专业的大模型技术专家。
-
-            **必须**严格依据【上下文】中的信息回答问题。如果信息不足，请明确告知“根据已有知识库，我无法回答这个问题”。
+          text: '用户问题：{{用户输入.query}}
 
 
-            【上下文】
+            arXiv 返回的原始 XML 数据如下：
 
-            {{#context#}}
+            {{{#1780125016783.body#}}节点.body}}
 
 
-            【用户问题】
-
-            {{#sys.query#}}'
-        selected: true
+            请从这个 XML 中提取论文标题、摘要、链接，并分析相关性。'
+        selected: false
         title: LLM
         type: llm
         vision:
@@ -166,10 +175,10 @@ workflow:
       height: 88
       id: llm
       position:
-        x: 726
+        x: 1621.4842834334895
         y: 282
       positionAbsolute:
-        x: 726
+        x: 1621.4842834334895
         y: 282
       selected: true
       sourcePosition: right
@@ -185,11 +194,11 @@ workflow:
       height: 103
       id: answer
       position:
-        x: 1058
-        y: 282
+        x: 1887
+        y: 99.00000000000003
       positionAbsolute:
-        x: 1058
-        y: 282
+        x: 1887
+        y: 99.00000000000003
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -221,10 +230,47 @@ workflow:
       height: 90
       id: '1780119009458'
       position:
-        x: 380
+        x: 402
+        y: 120.00000000000003
+      positionAbsolute:
+        x: 402
+        y: 120.00000000000003
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data: []
+          type: none
+        headers: ''
+        method: get
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: HTTP 请求
+        type: http-request
+        url: https://export.arxiv.org/api/query?search_query=all:{{{#sys.query#}}
+        variables: []
+      height: 157
+      id: '1780125016783'
+      position:
+        x: 723
         y: 282
       positionAbsolute:
-        x: 380
+        x: 723
         y: 282
       selected: false
       sourcePosition: right
@@ -232,7 +278,7 @@ workflow:
       type: custom
       width: 242
     viewport:
-      x: -531
-      y: 112.5
-      zoom: 1
+      x: 26.100177037137968
+      y: 219.516180701927
+      zoom: 0.6597539553864471
   rag_pipeline_variables: []
